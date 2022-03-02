@@ -1,13 +1,16 @@
 
 import Search from './Search'
-import {Outlet} from 'react-router-dom'
+
 
 export default function Attendees(props) {
     //console.log(props, "👾")
     const peopleList = props.people?.map((person, index) => {
         return(
           <li key={index}>
-            <p> {person.name} </p>
+            <p>Name: {person.name}, </p>
+            <p>Team: {person.team}, </p>
+            <p>Company: {person.Company}, </p>
+            <p>Title: {person.title}, </p>
           </li>
         )
       })
@@ -18,7 +21,7 @@ export default function Attendees(props) {
             <ul>
             {peopleList}
             </ul>
-            <Outlet />
+            
         </div>
     )
 }
