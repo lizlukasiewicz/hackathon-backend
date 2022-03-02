@@ -1,19 +1,28 @@
 import { useState } from 'react'
 //import {Outlet} from 'react-router-dom'
 
-export default function Search(people) {
-    console.log(people.people, "⛱")
-   const peopleData = people.people
+export default function Search(props) {
+    console.log(props.people, "⛱")
     //const [selection, setSelection] = useState('')
-    const [input, setInput] = useState('')
-    //const [result, setResult] = useState([])
+    const [input, setInput] = useState()
+    const [searchResult, setSearchResult] = useState([])
     //function handleSelection(e) {setSelection(e.target.value)}
     //console.log(e.target.value, "🦋")
-    function searchData() {
-        console.log( input, "✨") 
-        const result = peopleData.filter((person) => person.team === input )[0]
-        console.log(result, "🐉")
+    const searchData= ()=> {
+        console.log(typeof input, "✨") 
+        const result = props.people.filter((person) => person.team === parseInt(input))
+        setSearchResult(result)
     }
+    const filteredList = searchResult?.map((person, index) => {
+        return(
+            <li key ={index}>
+                <p>Name : {person.name} </p>
+                <p>Team : {person.team}</p>
+                <p>Company: {person.Company}</p>
+                <p>Title : {person.title}</p>
+            </li>
+        )
+    })
     return (
         <div>
             <p>search attendees by:</p>
@@ -24,7 +33,10 @@ export default function Search(people) {
                 <input onChange={(e) => {setInput(e.target.value)}}></input>
                 <button onClick={searchData}>submit</button>
             </div>
-           
+        <ul>
+
+           {filteredList}
+        </ul>
         </div>
     )
 }
