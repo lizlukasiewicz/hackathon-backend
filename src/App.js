@@ -1,15 +1,21 @@
 
 import './App.css';
 import { useState, useEffect } from 'react'
-//import Attendees from './components/Attendees';
-// import {
-//   BrowserRouter as Router,
-//   Route
-// } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link, 
+  Outlet
+} from 'react-router-dom'
+import Attendees from './components/Attendees';
+import Search from './components/Search';
 
 
-function App() {
+
+export default function App() {
   const [people, setPeople]= useState([])
+
   const getData=() => {
     fetch('attendees.json', {
       headers : {
@@ -27,28 +33,43 @@ function App() {
   useEffect(()=> {
     getData()
   }, [])
-  const peopleList = people?.map((person, index) => {
-    return(
-      <li key={index}>
-        <p> {person.name} </p>
-      </li>
-    )
-  })
+  
   return (
     <div className="App">
       <header className="App-header">
         <h1>Welcome to Nerd Out!</h1>
       </header>
-      <ul className="attendeeList">
-        {peopleList}
-      </ul>
+      <Router>
+      <Routes>
+        <Route path="/" element={<Layout/>}> 
+        <Route index element={<Home />}/>
+        <Route path="attendees" render={() => <Attendees people={people}/>} />
+        <Route path="search" element={<Search/>} />
+        </Route>
+      </Routes>
+      </Router>
     </div>
   );
 }
 
-export default App;
-//<Attendees people={people}/>
-// .then((myJson) => {
-//   console.log(myJson)
-//   setPeople(myJson)
-// })
+function Layout(){
+  return(
+      <div>
+          <nav>
+          <ul>
+              <li><Link to="/">Home</Link> </li>
+              <li><Link to="/attendees">Complete list of attendees</Link></li>
+              <li><Link to="/search">Search attendees by</Link></li>
+          </ul>
+          </nav>
+      <Outlet />
+      </div>
+  )
+}
+function Home() {
+  return(
+    <div>
+      <h3>Home</h3>
+    </div>
+  )
+}
