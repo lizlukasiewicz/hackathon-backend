@@ -43,8 +43,8 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Layout/>}> 
         <Route index element={<Home />}/>
-        <Route path="attendees" render={() => <Attendees people={people}/>} />
-        <Route path="search" element={<Search/>} />
+        <Route path="attendees"  element={<Attendees people={people}/>} />
+        <Route path="search" element={<Search people={people}/>} />
         </Route>
       </Routes>
       </Router>
