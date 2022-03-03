@@ -1,5 +1,7 @@
 import { useState } from 'react'
 //import {Outlet} from 'react-router-dom'
+import Edit from "./Edit"
+import Delete from "./Delete"
 
 export default function Search(props) {
     //console.log(props.people, "⛱")
@@ -9,7 +11,8 @@ export default function Search(props) {
     //function handleSelection(e) 
 
     const searchData= ()=> {
-        console.log(typeof input, input, "✨", typeof selection, selection)
+        //console.log(typeof input, input, "✨", typeof selection, selection)
+        // Long conditional for dropdown option filters
         if(selection === "team") {
             const result = props.people.filter((person) => person.team === parseInt(input))
         setSearchResult(result)
@@ -35,6 +38,8 @@ export default function Search(props) {
                 <p>Team : {person.team}</p>
                 <p>Company: {person.Company}</p>
                 <p>Title : {person.title}</p>
+                <Edit info={person}/>
+                <Delete info={person}/>
             </li>
         )
     })
