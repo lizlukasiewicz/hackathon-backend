@@ -8,7 +8,7 @@ export default function Attendees(props) {
     const peopleList = props.people?.map((person, index) => {
         return(
           <li key={index}>
-            <p>Name: {person.name}, </p>
+            <p>{person.name}, </p>
             <p>Team: {person.team}, </p>
             <p>Company: {person.Company}, </p>
             <p>Title: {person.title}, </p>
