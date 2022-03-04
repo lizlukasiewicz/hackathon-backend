@@ -27,4 +27,3 @@ export default function Attendees(props) {
         </div>
     )
 }
-//<Search />
